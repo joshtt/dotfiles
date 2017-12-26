@@ -1,0 +1,40 @@
+
+
+URxvt.scrollBar:        	  false
+URxvt.scrollBar_right:        true
+URxvt.depth: 				  32
+URxvt.background:             rgba:0000/0000/0500/5000
+URxvt.foreground:             #00FFFF
+URxvt.borderless: 			  1
+URxvt.font: 				  xft:DejaVu Sans Mono:size=11:antialias=true
+URxvt*letterSpace: 0
+
+!URxvt.keysym.Shift-Control-V: perl:clipboard:paste
+
+!URxvt.iso14755: False
+!URxvt.perl-ext-common: default,clipboard
+
+! black
+*color0:  #2E3436
+*color8:  #555753
+! red
+*color1:  #ff3f3f
+*color9:  #d65959
+! green
+*color2:  #a0ff47
+*color10: #97d160
+! yellow
+*color3:  #fff268
+*color11: #d6cc64
+! blue
+*color4:  #609dff
+*color12: #759ad6
+! purple
+*color5:  #eb72ff
+*color13: #c790d1
+! orange (replaces cyan)
+*color6:  #ff56e8
+*color14: #d370c6
+! white
+*color7:  #ffffff
+*color15: #EEEEEE

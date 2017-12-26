@@ -1,0 +1,198 @@
+set $mod Mod4
+set $workspace1 " 1   "
+set $workspace2 " 2   "
+set $workspace3 " 3   "
+set $workspace4 " 4   "
+set $workspace5 " 5   "
+set $workspace6 " 6  "
+set $workspace7 " 7  "
+set $workspace8 " 8  "
+set $workspace9 " 9  "
+set $workspace10 "   "
+
+set $gaps 24
+
+font pango:System San Francisco Display,FontAwesome
+#exec --no-startup-id xcompmgr
+floating_modifier $mod
+hide_edge_borders both
+new_window pixel 0
+exec_always feh --randomize --bg-scale ~/Pictures/Wallpapers/*
+#exec_always ~/day.sh
+
+bindsym $mod+Return exec urxvt
+bindsym $mod+Delete	exec poweroff
+bindsym $mod+Shift+Delete	exec reboot
+bindsym $mod+Tab		workspace back_and_forth
+bindsym $mod+Shift+space floating toggle
+bindsym $mod+space focus mode_toggle
+
+#Function Buttons
+#bindsym F1		exec --no-startup-id echo "help" > /dev/null
+#bindsym F2
+#bindsym F3
+#bindsym F4
+#bindsym F5
+#bindsym F6
+bindsym F7     exec sudo systemctl restart NetworkManager
+#bindsym F8
+#bindsym F9
+#bindsym F10
+#bindsym F11		fullscreen toggle
+#bindsym F12
+
+#bindsym $mod+F1
+#bindsym $mod+F2
+#bindsym $mod+F3		exec arandr
+#bindsym $mod+F4		exec sudo systemctl suspend
+#bindsym $mod+F5
+#bindsym $mod+F6
+#bindsym $mod+F7
+#bindsym $mod+F8
+#bindsym $mod+F9		exec --no-startup-id sudo bash ~/.config/i3/mount.sh
+#bindsym $mod+F10	exec --no-startup-id sudo bash ~/.config/i3/unmount.sh
+#bindsym $mod+F11
+#bindsym $mod+F12
+
+#Arrow Keys
+bindsym $mod+Left	focus left
+bindsym $mod+Down	focus down
+bindsym $mod+Up		focus up
+bindsym $mod+Right 	focus right
+bindsym $mod+Shift+Left	move left 150
+bindsym $mod+Shift+Down	move down 150
+bindsym $mod+Shift+Up	move up 150
+bindsym $mod+Shift+Right move right 150
+#END
+
+#use xbindkeys -k to see keypress events
+bindsym $mod+x exec urxvt -e xbindkeys -k
+
+bindsym $mod+a workspace $workspace2, gaps inner current set 0, exec atom
+bindsym $mod+b exec blueman-manager
+bindsym $mod+c workspace $workspace3, gaps inner current set 0, exec chromium
+bindsym $mod+f fullscreen toggle
+bindsym $mod+g workspace $workspace4, gaps inner current set 0, exec gimp
+bindsym $mod+i workspace $workspace5, gaps inner current set 0, exec inkscape
+bindsym $mod+m exec thunar
+#bindsym $mod+r exec rofi -show run
+bindsym $mod+r exec --no-startup-id i3-dmenu-desktop
+bindsym $mod+t split toggle
+bindsym $mod+v exec vlc, workspace $workspace10
+
+bindsym $mod+h	resize shrink width 40 px
+bindsym $mod+k	resize shrink height 40 px
+bindsym $mod+j	resize grow height 40 px
+bindsym $mod+l	resize grow width 40 px
+
+bindsym $mod+s		gaps inner current plus $gaps
+bindsym $mod+Shift+s	gaps inner current minus $gaps
+
+bindsym $mod+Shift+a exec sudo atom
+bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+bindsym $mod+Shift+n exec nm-connection-editor
+bindsym $mod+Shift+m exec sudo thunar
+bindsym $mod+Shift+q kill
+bindsym $mod+Shift+r restart
+bindsym $mod+Shift+t exec xrdb -merg ~/.Xresources
+
+bindsym Print exec escrotum -C
+
+bindsym XF86AudioPlay exec ~/.scripts/playtog.sh
+bindsym $mod+bracketleft exec playerctl previous
+bindsym $mod+bracketright exec playerctl next
+
+bindsym XF86MonBrightnessUp exec xbacklight -inc 10
+bindsym $mod+XF86MonBrightnessDown exec xbacklight -set 1
+bindsym XF86MonBrightnessDown exec xbacklight -dec 10
+
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +3%
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -3%
+bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle
+#bindsym $mod+XF86AudioMute exec amixer set Speaker toggle, exec amixer set Headphone toggle
+bindsym $mod+XF86AudioRaiseVolume exec pavucontrol
+
+
+
+#bindsym XF86AudioRaiseVolume exec amixer set Master 3+
+#bindsym XF86AudioLowerVolume exec amixer set Master 3-
+#bindsym XF86AudioMute exec amixer set Master toggle
+#bindsym $mod+XF86AudioMute exec amixer set Speaker toggle, exec amixer set Headphone toggle
+#bindsym $mod+XF86AudioRaiseVolume exec ~/.scripts/alsa.sh
+
+assign [class="Vlc"] $workspace10
+assign [class="Atom"] $workspace2
+assign [class="Chromium"] $workspace3
+assign [class="Gimp"] $workspace4
+for_window [class="Thunar"] floating enable, resize set 640 500
+for_window [class="Pcmanfm"] floating enable, resize set 640 500
+for_window [class="Pavucontrol"] floating enable, resize set 600 420
+for_window [class="Xarchiver"] floating enable, resize set 500 400
+for_window [class="Blueman-manager"] floating enable, resize set 600 600
+for_window [class="easydream"] floating enable
+floating_maximum_size 1300 x 700
+
+#set $bg-color            #303641
+
+set $bg-color            #2f343f
+set $light-bg            #384154
+set $inactive-bg-color   #2f343f
+set $text-color          #f3f4f5
+set $inactive-text-color #ABAFB8
+set $urgent-bg-color     #E53935
+
+# window color
+#                       border              background         text                 indicator
+client.focused          $bg-color           $bg-color          $text-color          #00ff00
+client.unfocused        $inactive-bg-color  $inactive-bg-color $inactive-text-color #00ff00
+client.focused_inactive $inactive-bg-color  $inactive-bg-color $inactive-text-color #00ff00
+client.urgent           $urgent-bg-color    $urgent-bg-color   $text-color          #00ff00
+
+
+
+# switch to workspace
+bindsym $mod+1 workspace $workspace1
+bindsym $mod+2 workspace $workspace2
+bindsym $mod+3 workspace $workspace3
+bindsym $mod+4 workspace $workspace4
+bindsym $mod+5 workspace $workspace5
+bindsym $mod+6 workspace $workspace6
+bindsym $mod+7 workspace $workspace7
+bindsym $mod+8 workspace $workspace8
+bindsym $mod+9 workspace $workspace9
+bindsym $mod+0 workspace $workspace10
+
+# move focused container to workspace
+bindsym $mod+Shift+1 move container to workspace $workspace1
+bindsym $mod+Shift+2 move container to workspace $workspace2
+bindsym $mod+Shift+3 move container to workspace $workspace3
+bindsym $mod+Shift+4 move container to workspace $workspace4
+bindsym $mod+Shift+5 move container to workspace $workspace5
+bindsym $mod+Shift+6 move container to workspace $workspace6
+bindsym $mod+Shift+7 move container to workspace $workspace7
+bindsym $mod+Shift+8 move container to workspace $workspace8
+bindsym $mod+Shift+9 move container to workspace $workspace9
+bindsym $mod+Shift+0 move container to workspace $workspace10
+
+# Start i3bar to display a workspace bar (plus the system information i3status
+# finds out, if available)
+bar {
+#    position top
+    status_command i3blocks -c ~/.config/i3/i3blocks.conf
+	mode hide
+	hidden_state hide
+	modifier $mod
+    font pango:FontAwesome, Bitter 13
+	colors{
+                background $bg-color
+                separator #757575
+                #                  border             background          text
+                focused_workspace  $light-bg          $light-bg           $text-color
+                inactive_workspace $inactive-bg-color $inactive-bg-color  $inactive-text-color
+                urgent_workspace   $urgent-bg-color   $urgent-bg-color    $text-color
+        }
+
+}
+#GAPS
+#smart_gaps on
+gaps inner $gaps
